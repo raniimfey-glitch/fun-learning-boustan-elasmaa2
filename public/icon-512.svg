@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+    <radialGradient id="innerGlow512" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FEF3C7" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="plantGrad512" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#34D399" />
+    </linearGradient>
+    <linearGradient id="bookGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#FEF3C7" />
+    </linearGradient>
+    <linearGradient id="goldGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="100%" stop-color="#EAB308" />
+    </linearGradient>
+    <filter id="dropShadow512" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#78350F" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad512)" />
+  <rect width="512" height="512" rx="112" fill="url(#innerGlow512)" />
+  <rect x="12" y="12" width="488" height="488" rx="100" fill="none" stroke="#FEF3C7" stroke-width="8" stroke-opacity="0.5" />
+
+  <g filter="url(#dropShadow512)" transform="translate(0, -10)">
+    <g transform="translate(256, 340)">
+      <path d="M -160,20 Q -80,45 0,25 Q 80,45 160,20 L 160,-35 Q 80,-10 0,-30 Q -80,-10 -160,-35 Z" fill="#78350F" />
+      <path d="M 0,22 Q -80,42 -155,15 L -155,-40 Q -80,-15 0,-35 Z" fill="url(#bookGrad512)" stroke="#FDE68A" stroke-width="3" />
+      <path d="M 0,22 Q 80,42 155,15 L 155,-40 Q 80,-15 0,-35 Z" fill="url(#bookGrad512)" stroke="#FDE68A" stroke-width="3" />
+
+      <path d="M -130,-15 Q -70,5 -20,-10" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.7" />
+      <path d="M -130,5 Q -70,25 -20,10" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.7" />
+      <path d="M 130,-15 Q 70,5 20,-10" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.7" />
+      <path d="M 130,5 Q 70,25 20,10" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.7" />
+
+      <path d="M -8,-32 L 8,-32 L 6,50 L 0,42 L -6,50 Z" fill="#DC2626" />
+    </g>
+
+    <path d="M 248,310 Q 256,230 256,180 Q 256,230 264,310 Z" fill="#92400E" />
+    
+    <g>
+      <circle cx="210" cy="180" r="55" fill="url(#plantGrad512)" />
+      <circle cx="302" cy="180" r="55" fill="url(#plantGrad512)" />
+      <circle cx="256" cy="140" r="65" fill="#10B981" />
+      <circle cx="230" cy="150" r="40" fill="#34D399" />
+      <circle cx="282" cy="150" r="40" fill="#6EE7B7" />
+    </g>
+
+    <g transform="translate(256, 175)">
+      <circle cx="0" cy="-10" r="38" fill="#4C1D95" stroke="#FDE047" stroke-width="4" />
+      <text x="0" y="2" font-family="'Readex Pro', 'Tajawal', Arial, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">اسْمٌ</text>
+    </g>
+
+    <g transform="translate(110, 110)">
+      <path d="M 0,-24 L 6,-7 L 23,0 L 6,7 L 0,24 L -6,7 L -23,0 L -6,-7 Z" fill="url(#goldGrad512)" />
+      <circle cx="0" cy="0" r="4" fill="#FFFFFF" />
+    </g>
+
+    <g transform="translate(395, 120)">
+      <path d="M 0,-30 L 8,-9 L 29,0 L 8,9 L 0,30 L -8,9 L -29,0 L -8,-9 Z" fill="url(#goldGrad512)" />
+      <circle cx="0" cy="0" r="5" fill="#FFFFFF" />
+    </g>
+
+    <g transform="translate(420, 240)">
+      <path d="M 0,-16 L 4,-5 L 15,0 L 4,5 L 0,16 L -4,5 L -15,0 L -4,-5 Z" fill="#FEF08A" />
+    </g>
+
+    <g transform="translate(90, 230)">
+      <path d="M 0,-18 L 5,-5 L 17,0 L 5,5 L 0,18 L -5,5 L -17,0 L -5,-5 Z" fill="#FEF08A" />
+    </g>
+  </g>
+
+  <g transform="translate(256, 455)">
+    <rect x="-140" y="-22" width="280" height="44" rx="22" fill="#78350F" opacity="0.85" />
+    <text x="0" y="3" font-family="'Readex Pro', Arial, sans-serif" font-weight="800" font-size="22" fill="#FEF3C7" text-anchor="middle" dominant-baseline="middle">بُسْتَانُ الْأَسْمَاءِ</text>
+  </g>
+</svg>

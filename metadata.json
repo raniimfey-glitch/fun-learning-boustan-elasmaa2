@@ -1,0 +1,6 @@
+{
+  "name": "بستان الأسماء",
+  "description": "تطبيق تعليمي تفاعلي مخصص لتعلم الاسم وأنواعه وعلاماته لتلاميذ السنة الثانية ابتدائي مع النطق الصوتي والألعاب ونظام المكافآت.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    /* Scale base font size up for primary school kids readability */
+    font-size: 18px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      font-size: 19px;
+    }
+  }
+
+  body {
+    font-family: 'Readex Pro', 'Tajawal', system-ui, -apple-system, sans-serif;
+    line-height: 1.85;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+/* Ensure Tashkeel (diacritics) render larger, bold and clearly without clipping */
+.tashkeel-text {
+  line-height: 2.3 !important;
+  letter-spacing: 0.025em;
+  font-weight: 700;
+}
+
+/* Enhanced readability for interactive words and Arabic cards */
+.arabic-title {
+  font-family: 'Readex Pro', 'Tajawal', sans-serif;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(-4%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2.5s infinite ease-in-out;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Custom friendly scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fef3c7;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbbf24;
+  border-radius: 9999px;
+  border: 2px solid #fef3c7;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}

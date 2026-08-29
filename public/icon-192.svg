@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bgGrad192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+    <linearGradient id="plantGrad192" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#34D399" />
+    </linearGradient>
+    <linearGradient id="bookGrad192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#FEF3C7" />
+    </linearGradient>
+    <linearGradient id="goldGrad192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="100%" stop-color="#EAB308" />
+    </linearGradient>
+  </defs>
+
+  <rect width="192" height="192" rx="42" fill="url(#bgGrad192)" />
+  <rect x="5" y="5" width="182" height="182" rx="38" fill="none" stroke="#FEF3C7" stroke-width="3" stroke-opacity="0.5" />
+
+  <g transform="translate(0, -2)">
+    <!-- Book Base -->
+    <g transform="translate(96, 130)">
+      <path d="M -60,8 Q -30,17 0,9 Q 30,17 60,8 L 60,-13 Q 30,-4 0,-11 Q -30,-4 -60,-13 Z" fill="#78350F" />
+      <path d="M 0,8 Q -30,16 -58,6 L -58,-15 Q -30,-6 0,-13 Z" fill="url(#bookGrad192)" stroke="#FDE68A" stroke-width="1.5" />
+      <path d="M 0,8 Q 30,16 58,6 L 58,-15 Q 30,-6 0,-13 Z" fill="url(#bookGrad192)" stroke="#FDE68A" stroke-width="1.5" />
+      <path d="M -3,-12 L 3,-12 L 2,18 L 0,15 L -2,18 Z" fill="#DC2626" />
+    </g>
+
+    <!-- Tree Stem & Canopy -->
+    <path d="M 93,120 Q 96,90 96,70 Q 96,90 99,120 Z" fill="#92400E" />
+    <circle cx="78" cy="70" r="22" fill="url(#plantGrad192)" />
+    <circle cx="114" cy="70" r="22" fill="url(#plantGrad192)" />
+    <circle cx="96" cy="54" r="25" fill="#10B981" />
+    <circle cx="86" cy="58" r="15" fill="#34D399" />
+    <circle cx="106" cy="58" r="15" fill="#6EE7B7" />
+
+    <!-- Center Calligraphy Emblem -->
+    <g transform="translate(96, 68)">
+      <circle cx="0" cy="-4" r="15" fill="#4C1D95" stroke="#FDE047" stroke-width="2" />
+      <text x="0" y="1" font-family="'Readex Pro', 'Tajawal', Arial, sans-serif" font-weight="900" font-size="11" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">اسْمٌ</text>
+    </g>
+
+    <!-- Sparkles -->
+    <g transform="translate(42, 42)">
+      <path d="M 0,-9 L 2.5,-2.5 L 9,0 L 2.5,2.5 L 0,9 L -2.5,2.5 L -9,0 L -2.5,-2.5 Z" fill="url(#goldGrad192)" />
+    </g>
+    <g transform="translate(150, 46)">
+      <path d="M 0,-11 L 3,-3 L 11,0 L 3,3 L 0,11 L -3,3 L -11,0 L -3,-3 Z" fill="url(#goldGrad192)" />
+    </g>
+  </g>
+
+  <!-- Bottom Mini Label -->
+  <g transform="translate(96, 172)">
+    <rect x="-55" y="-9" width="110" height="18" rx="9" fill="#78350F" opacity="0.9" />
+    <text x="0" y="1" font-family="'Readex Pro', Arial, sans-serif" font-weight="800" font-size="9" fill="#FEF3C7" text-anchor="middle" dominant-baseline="middle">بُسْتَانُ الْأَسْمَاءِ</text>
+  </g>
+</svg>
