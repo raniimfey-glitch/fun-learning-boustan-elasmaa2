@@ -25,14 +25,14 @@ export const CertificateView: React.FC<CertificateViewProps> = ({ stars, onClose
   });
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto" id="certificate-modal-overlay">
-      <div className="bg-white rounded-3xl max-w-3xl w-full border-4 border-amber-300 shadow-2xl overflow-hidden my-auto" id="certificate-modal-card">
+    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 overflow-y-auto" id="certificate-modal-overlay">
+      <div className="bg-white rounded-3xl max-w-2xl w-full border-3 border-amber-300 shadow-2xl overflow-hidden my-auto max-h-[96dvh] flex flex-col" id="certificate-modal-card">
         
         {/* Action Header (Hidden during print) */}
-        <div className="bg-amber-100/90 px-5 py-3 border-b border-amber-300 flex items-center justify-between print:hidden">
+        <div className="bg-amber-100/90 px-4 py-2.5 border-b border-amber-300 flex items-center justify-between print:hidden flex-shrink-0">
           <div className="flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-amber-600" />
-            <h3 className="font-extrabold text-sm sm:text-base text-amber-950 font-readex">
+            <Trophy className="w-4 h-4 text-amber-600" />
+            <h3 className="font-extrabold text-xs sm:text-sm text-amber-950 font-readex">
               شَهَادَةُ التَّفَوُّقِ وَالتَّقْدِيرِ لِلصَّفِّ الثَّانِي
             </h3>
           </div>
@@ -40,10 +40,10 @@ export const CertificateView: React.FC<CertificateViewProps> = ({ stars, onClose
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm transition-transform hover:scale-105"
+              className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-xs transition-transform hover:scale-105"
               id="btn-print-certificate"
             >
-              <Printer className="w-4 h-4" />
+              <Printer className="w-3.5 h-3.5" />
               <span>طِبَاعَةُ الشَّهَادَةِ</span>
             </button>
 
@@ -53,47 +53,47 @@ export const CertificateView: React.FC<CertificateViewProps> = ({ stars, onClose
               title="إِغْلَاقٌ"
               id="btn-close-certificate"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
         {/* Certificate Body (Optimized for Screen & Print) */}
-        <div className="p-6 sm:p-10 bg-gradient-to-br from-amber-50/70 via-white to-yellow-50/70 relative text-center text-slate-800 space-y-6">
+        <div className="p-3 sm:p-6 bg-gradient-to-br from-amber-50/70 via-white to-yellow-50/70 relative text-center text-slate-800 space-y-4 overflow-y-auto flex-1">
           
           {/* Certificate Ornate Frame Border */}
-          <div className="border-4 border-double border-amber-400 p-6 sm:p-8 rounded-3xl relative space-y-5 bg-white/60">
+          <div className="border-3 border-double border-amber-400 p-4 sm:p-6 rounded-2xl relative space-y-3 bg-white/60">
             
             {/* Top Emblem */}
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-3xl sm:text-4xl">🌟</span>
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-white text-3xl sm:text-4xl shadow-md border-2 border-white mx-auto">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-2xl sm:text-3xl">🌟</span>
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-white text-2xl sm:text-3xl shadow-sm border-2 border-white mx-auto">
                 👑
               </div>
-              <span className="text-3xl sm:text-4xl">🌟</span>
+              <span className="text-2xl sm:text-3xl">🌟</span>
             </div>
 
             {/* Certificate Title */}
-            <div className="space-y-1">
-              <span className="text-xs sm:text-sm font-extrabold text-amber-700 tracking-wider">
+            <div className="space-y-0.5">
+              <span className="text-[11px] sm:text-xs font-extrabold text-amber-700 tracking-wider">
                 بُسْتَانُ اللُّغَةِ الْعَرَبِيَّةِ - مَرْحَلَةُ التَّعْلِيمِ الِابْتِدَائِيِّ
               </span>
-              <h1 className="text-2xl sm:text-4xl font-black text-amber-950 font-readex">
+              <h1 className="text-xl sm:text-3xl font-black text-amber-950 font-readex">
                 شَهَادَةُ تَفَوُّقٍ وَإِبْدَاعٍ
               </h1>
-              <p className="text-xs sm:text-sm font-bold text-amber-800">
+              <p className="text-[11px] sm:text-xs font-bold text-amber-800">
                 فِي مَادَّةِ اللُّغَةِ الْعَرَبِيَّةِ (دَرْسُ الِاسْمِ وَعَلَامَاتِهِ)
               </p>
             </div>
 
             {/* Awarded Text */}
-            <div className="space-y-3 max-w-xl mx-auto">
-              <p className="text-xs sm:text-sm text-slate-600 font-bold">
+            <div className="space-y-2 max-w-lg mx-auto">
+              <p className="text-[11px] sm:text-xs text-slate-600 font-bold">
                 تُهْدَى هَذِهِ الشَّهَادَةُ بِكُلِّ فَخْرٍ وَاعْتِزَازٍ إِلَى التِّلْمِيذِ الْمُتَفَوِّقِ:
               </p>
 
               {/* Editable Student Name */}
-              <div className="relative inline-block my-1">
+              <div className="relative inline-block my-0.5">
                 {isEditing ? (
                   <input
                     type="text"
@@ -101,13 +101,13 @@ export const CertificateView: React.FC<CertificateViewProps> = ({ stars, onClose
                     onChange={(e) => setStudentName(e.target.value)}
                     onBlur={() => setIsEditing(false)}
                     autoFocus
-                    className="text-xl sm:text-3xl font-black text-amber-900 border-b-2 border-amber-500 px-4 py-1 text-center bg-amber-50 rounded-xl focus:outline-none font-readex"
+                    className="text-lg sm:text-2xl font-black text-amber-900 border-b-2 border-amber-500 px-3 py-0.5 text-center bg-amber-50 rounded-xl focus:outline-none font-readex"
                     id="input-student-name"
                   />
                 ) : (
                   <div
                     onClick={() => setIsEditing(true)}
-                    className="text-xl sm:text-3xl font-black text-amber-900 border-b-2 border-amber-400 border-dashed px-6 py-1 cursor-pointer hover:bg-amber-100/50 rounded-xl transition-colors font-readex tashkeel-text"
+                    className="text-lg sm:text-2xl font-black text-amber-900 border-b-2 border-amber-400 border-dashed px-4 py-0.5 cursor-pointer hover:bg-amber-100/50 rounded-xl transition-colors font-readex tashkeel-text"
                     title="اضْغَطْ لِتَعْدِيلِ اسْمِكَ"
                   >
                     « {studentName} »
@@ -121,21 +121,21 @@ export const CertificateView: React.FC<CertificateViewProps> = ({ stars, onClose
             </div>
 
             {/* Golden Seal & Signatures */}
-            <div className="pt-4 border-t border-amber-200 flex flex-row items-center justify-between text-xs sm:text-sm font-bold text-slate-600 px-4 sm:px-8">
+            <div className="pt-3 border-t border-amber-200 flex flex-row items-center justify-between text-xs font-bold text-slate-600 px-2 sm:px-6">
               <div className="text-right">
-                <span className="block text-[11px] text-slate-400">التَّارِيخُ:</span>
+                <span className="block text-[10px] text-slate-400">التَّارِيخُ:</span>
                 <span className="text-slate-800 font-extrabold">{currentDate}</span>
               </div>
 
               {/* Official Seal Emblem */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-amber-400 bg-amber-100 flex flex-col items-center justify-center text-[10px] font-black text-amber-900 shadow-inner">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-3 border-amber-400 bg-amber-100 flex flex-col items-center justify-center text-[9px] font-black text-amber-900 shadow-inner">
                 <span>⭐</span>
                 <span>خَتْمُ التَّفَوُّقِ</span>
                 <span>الصَّفُّ الثَّانِي</span>
               </div>
 
               <div className="text-left">
-                <span className="block text-[11px] text-slate-400">مُعَلِّمُ اللُّغَةِ:</span>
+                <span className="block text-[10px] text-slate-400">مُعَلِّمُ اللُّغَةِ:</span>
                 <span className="text-amber-900 font-extrabold">بُسْتَانُ الْأَسْمَاءِ 🌟</span>
               </div>
             </div>

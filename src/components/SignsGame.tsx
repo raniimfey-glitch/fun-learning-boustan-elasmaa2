@@ -128,23 +128,20 @@ export const SignsGame: React.FC<SignsGameProps> = ({ onEarnStars }) => {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-purple-200 shadow-sm space-y-6" id="signs-game-container">
+    <div className="bg-white rounded-2xl p-3 sm:p-4 border-2 border-purple-200 shadow-xs flex-1 flex flex-col justify-between gap-2 min-h-0" id="signs-game-container">
       
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-right">
+      {/* Header (flex-shrink: 0) */}
+      <div className="flex items-center justify-between gap-2 text-right flex-shrink-0">
         <div>
-          <span className="bg-purple-100 text-purple-800 text-xs px-2.5 py-0.5 rounded-full font-extrabold border border-purple-300 inline-block mb-1">
-            مُخْتَبَرُ التَّجَارِبِ
-          </span>
-          <h2 className="text-xl sm:text-2xl font-black text-purple-950 font-readex">
+          <h2 className="text-base sm:text-lg font-black text-purple-950 font-readex">
             كَاشِفُ عَلَامَاتِ الِاسْمِ السِّحْرِيَّةِ 🪄
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm font-semibold">
+          <p className="text-slate-600 text-[11px] sm:text-xs font-semibold">
             اخْتَبِرْ مَعْرِفَتَكَ بِعَلَامَاتِ الِاسْمِ: (الْـ، التَّنْوِين، التَّاء الْمَرْبُوطَة):
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-purple-50 px-3.5 py-1.5 rounded-2xl border border-purple-200">
+        <div className="flex items-center gap-1.5 bg-purple-50 px-3 py-1 rounded-xl border border-purple-200">
           <span className="text-xs font-bold text-purple-900">
             تَحَدِّي {challengeIdx + 1} مِنْ {SIGN_CHALLENGES.length}
           </span>
@@ -152,34 +149,34 @@ export const SignsGame: React.FC<SignsGameProps> = ({ onEarnStars }) => {
       </div>
 
       {!isCompleted ? (
-        <div className="space-y-6">
+        <div className="flex-1 flex flex-col justify-between gap-2 min-h-0">
           
-          {/* Question Card */}
-          <div className="bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100/70 border-3 border-purple-300 rounded-3xl p-5 sm:p-6 text-right space-y-3">
+          {/* Question Card (flex-shrink: 1, fit-card-scale) */}
+          <div className="bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100/70 border-2 border-purple-300 rounded-2xl p-3 sm:p-4 text-right space-y-2 flex-shrink-1 my-auto fit-card-scale">
             
             <div className="flex items-center justify-between">
-              <span className="text-4xl">{challenge.icon}</span>
+              <span className="text-3xl sm:text-4xl">{challenge.icon}</span>
               <button
                 onClick={() => {
                   soundManager.playPop();
                   soundManager.speakArabic(challenge.question);
                 }}
-                className="bg-purple-200 hover:bg-purple-300 text-purple-900 font-bold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors"
+                className="bg-purple-200 hover:bg-purple-300 text-purple-900 font-bold text-xs px-2.5 py-1 rounded-xl flex items-center gap-1 transition-colors"
                 id="btn-speak-sign-q"
               >
-                <Volume2 className="w-4 h-4" />
+                <Volume2 className="w-3.5 h-3.5" />
                 <span>اسْتَمِعْ لِلسُّؤَالِ</span>
               </button>
             </div>
 
-            <h3 className="text-lg sm:text-xl font-black text-purple-950 tashkeel-text font-readex leading-relaxed">
+            <h3 className="text-base sm:text-lg font-black text-purple-950 tashkeel-text font-readex leading-normal">
               {challenge.question}
             </h3>
 
           </div>
 
-          {/* Options Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Options Grid (flex-shrink: 0) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-shrink-0">
             {challenge.options.map((opt, idx) => {
               const isSelected = selectedOption === idx;
               let btnStyle = 'bg-slate-50 border-slate-200 hover:border-purple-300 text-slate-800';
@@ -197,21 +194,21 @@ export const SignsGame: React.FC<SignsGameProps> = ({ onEarnStars }) => {
                   key={idx}
                   onClick={() => handleSelectOption(idx)}
                   disabled={isAnswered}
-                  className={`p-4 rounded-2xl border-2 transition-all text-center flex flex-col items-center justify-center gap-2 ${btnStyle}`}
+                  className={`p-2.5 sm:p-3 rounded-xl border-2 transition-all text-center flex flex-col items-center justify-center gap-1 ${btnStyle}`}
                   id={`btn-sign-opt-${idx}`}
                 >
-                  <span className="text-2xl sm:text-3xl font-black tashkeel-text block">
+                  <span className="text-lg sm:text-xl font-black tashkeel-text block">
                     {opt.text}
                   </span>
                   {isAnswered && opt.isCorrect && (
-                    <span className="text-xs text-emerald-700 font-bold flex items-center gap-1">
-                      <CheckCircle2 className="w-4 h-4" />
+                    <span className="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                       إِجَابَةٌ صَحِيحَةٌ!
                     </span>
                   )}
                   {isAnswered && isSelected && !opt.isCorrect && (
-                    <span className="text-xs text-rose-700 font-bold flex items-center gap-1">
-                      <XCircle className="w-4 h-4" />
+                    <span className="text-[11px] text-rose-700 font-bold flex items-center gap-1">
+                      <XCircle className="w-3.5 h-3.5" />
                       إِجَابَةٌ خَاطِئَةٌ
                     </span>
                   )}
@@ -220,20 +217,20 @@ export const SignsGame: React.FC<SignsGameProps> = ({ onEarnStars }) => {
             })}
           </div>
 
-          {/* Answer Explanation & Next Button */}
+          {/* Answer Explanation & Next Button (flex-shrink: 0) */}
           {isAnswered && (
-            <div className="p-4 bg-purple-50 border-2 border-purple-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-right">
-              <div className="flex-1 space-y-1">
-                <span className="text-xs font-black text-purple-900 block">
+            <div className="p-2.5 bg-purple-50 border border-purple-200 rounded-xl flex items-center justify-between gap-2 text-right flex-shrink-0">
+              <div className="flex-1">
+                <span className="text-[11px] font-black text-purple-900 block">
                   💡 تَوْضِيحُ الْقَاعِدَةِ:
                 </span>
-                <p className="text-xs sm:text-sm font-bold text-slate-800 tashkeel-text">
+                <p className="text-xs font-bold text-slate-800 tashkeel-text leading-tight">
                   {selectedOption !== null && challenge.options[selectedOption].explanation}
                 </p>
               </div>
               <button
                 onClick={handleNextChallenge}
-                className="bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md hover:scale-105 transition-all shrink-0"
+                className="bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-xs hover:scale-105 transition-all shrink-0"
                 id="btn-next-sign-challenge"
               >
                 التَّالِي ⬅️
@@ -244,20 +241,20 @@ export const SignsGame: React.FC<SignsGameProps> = ({ onEarnStars }) => {
         </div>
       ) : (
         /* Completed */
-        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 border-3 border-purple-300 rounded-3xl p-7 text-center space-y-4 max-w-lg mx-auto shadow-md">
-          <div className="w-20 h-20 bg-purple-500 text-white rounded-3xl flex items-center justify-center text-4xl mx-auto shadow-md">
+        <div className="bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-300 rounded-2xl p-5 text-center space-y-3 max-w-sm mx-auto shadow-xs my-auto flex-shrink-1">
+          <div className="w-14 h-14 bg-purple-500 text-white rounded-2xl flex items-center justify-center text-3xl mx-auto shadow-xs">
             🪄
           </div>
-          <h3 className="text-2xl font-black text-purple-950 font-readex">
+          <h3 className="text-lg sm:text-xl font-black text-purple-950 font-readex">
             أَحْسَنْتَ يَا خَبِيرَ الْعَلَامَاتِ!
           </h3>
-          <p className="text-purple-900 font-bold text-sm tashkeel-text">
+          <p className="text-purple-900 font-bold text-xs tashkeel-text">
             أَصْبَحْتَ تُمَيِّزُ عَلَامَاتِ الِاسْمِ السِّحْرِيَّةِ بِكُلِّ سُهُولَةٍ!
           </p>
 
           <button
             onClick={handleReset}
-            className="bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm sm:text-base px-6 py-3 rounded-2xl flex items-center justify-center gap-2 mx-auto shadow-md hover:scale-105 transition-all"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs px-5 py-2.5 rounded-xl flex items-center justify-center gap-2 mx-auto shadow-xs hover:scale-105 transition-all"
             id="btn-reset-signs"
           >
             <span>إِعَادَةُ التَّجْرِبَةِ</span>

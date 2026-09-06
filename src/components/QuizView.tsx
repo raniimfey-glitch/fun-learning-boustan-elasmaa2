@@ -65,24 +65,21 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
   };
 
   return (
-    <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-indigo-200 shadow-sm space-y-6" id="quiz-view-container">
+    <div className="bg-white rounded-2xl p-3 sm:p-4 border-2 border-indigo-200 shadow-xs flex-1 flex flex-col justify-between gap-2 min-h-0" id="quiz-view-container">
       
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-right">
+      {/* Header (flex-shrink: 0) */}
+      <div className="flex items-center justify-between gap-2 text-right flex-shrink-0">
         <div>
-          <span className="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-0.5 rounded-full font-extrabold border border-indigo-300 inline-block mb-1">
-            تَحَدِّي الْأَذْكِيَاءِ
-          </span>
-          <h2 className="text-xl sm:text-2xl font-black text-indigo-950 font-readex">
+          <h2 className="text-base sm:text-lg font-black text-indigo-950 font-readex">
             الِاخْتِبَارُ الذَّكِيُّ لِبَطَلِ الْأَسْمَاءِ ⭐
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm font-semibold">
+          <p className="text-slate-600 text-[11px] sm:text-xs font-semibold">
             أَجِبْ عَنِ الْأَسْئِلَةِ وَاحْصُلْ عَلَى أَوْسِمَةِ التَّفَوُّقِ:
           </p>
         </div>
 
         {/* Progress Badge */}
-        <div className="flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-2xl border border-indigo-200">
+        <div className="flex items-center gap-1.5 bg-indigo-50 px-3 py-1 rounded-xl border border-indigo-200">
           <span className="text-xs font-black text-indigo-900">
             السُّؤَالُ {currentQIndex + 1} مِنْ {QUIZ_QUESTIONS.length}
           </span>
@@ -90,17 +87,17 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
       </div>
 
       {!isQuizComplete ? (
-        <div className="space-y-5">
+        <div className="flex-1 flex flex-col justify-between gap-2 min-h-0">
           
-          {/* Question Box */}
-          <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-indigo-100/60 border-3 border-indigo-200 rounded-3xl p-5 sm:p-6 text-right space-y-3">
+          {/* Question Box (flex-shrink: 1, fit-card-scale) */}
+          <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-indigo-100/60 border-2 border-indigo-200 rounded-2xl p-3 sm:p-4 text-right space-y-2 flex-shrink-1 my-auto fit-card-scale">
             
             <div className="flex items-center justify-between">
-              <span className="bg-indigo-600 text-white text-xs font-black px-3 py-1 rounded-xl">
+              <span className="bg-indigo-600 text-white text-[11px] font-black px-2.5 py-0.5 rounded-lg">
                 سُؤَالٌ {currentQIndex + 1}
               </span>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 {question.hint && (
                   <button
                     onClick={() => {
@@ -108,11 +105,11 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
                       setShowHint(prev => !prev);
                       if (!showHint) soundManager.speakArabic(`تَلْمِيحٌ: ${question.hint}`);
                     }}
-                    className="p-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold flex items-center gap-1 border border-amber-300"
+                    className="p-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold flex items-center gap-1 border border-amber-300"
                     title="تَلْمِيحٌ مُسَاعِدٌ"
                     id="btn-quiz-hint"
                   >
-                    <HelpCircle className="w-4 h-4" />
+                    <HelpCircle className="w-3.5 h-3.5" />
                     <span>تَلْمِيحٌ</span>
                   </button>
                 )}
@@ -122,22 +119,22 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
                     soundManager.playPop();
                     soundManager.speakArabic(question.question);
                   }}
-                  className="bg-indigo-200 hover:bg-indigo-300 text-indigo-900 font-bold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-colors"
+                  className="bg-indigo-200 hover:bg-indigo-300 text-indigo-900 font-bold text-xs px-2.5 py-1 rounded-xl flex items-center gap-1 transition-colors"
                   id="btn-speak-quiz-q"
                 >
-                  <Volume2 className="w-4 h-4" />
-                  <span>اسْتَمِعْ لِلسُّؤَالِ</span>
+                  <Volume2 className="w-3.5 h-3.5" />
+                  <span>اسْتَمِعْ</span>
                 </button>
               </div>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-black text-indigo-950 tashkeel-text font-readex leading-relaxed">
+            <h3 className="text-base sm:text-lg font-black text-indigo-950 tashkeel-text font-readex leading-normal">
               {question.question}
             </h3>
 
             {/* Hint Box */}
             {showHint && question.hint && (
-              <div className="p-3 bg-amber-50 rounded-2xl border border-amber-300 text-xs sm:text-sm font-bold text-amber-900 flex items-center gap-2 animate-bounce-slow">
+              <div className="p-2 bg-amber-50 rounded-xl border border-amber-300 text-xs font-bold text-amber-900 flex items-center gap-1.5 animate-bounce-slow">
                 <span>💡</span>
                 <span>تَلْمِيحٌ مُسَاعِدٌ: {question.hint}</span>
               </div>
@@ -145,8 +142,8 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
 
           </div>
 
-          {/* Options Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Options Grid (flex-shrink: 0) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-shrink-0">
             {question.options.map(opt => {
               const isSelected = selectedOptId === opt.id;
               let style = 'bg-slate-50 border-slate-200 hover:border-indigo-300 text-slate-800';
@@ -164,22 +161,22 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
                   key={opt.id}
                   onClick={() => handleSelectOption(opt.id)}
                   disabled={isAnswered}
-                  className={`p-4 rounded-2xl border-2 transition-all text-center flex flex-col items-center justify-center gap-2 ${style}`}
+                  className={`p-2.5 sm:p-3 rounded-xl border-2 transition-all text-center flex flex-col items-center justify-center gap-1 ${style}`}
                   id={`btn-quiz-opt-${opt.id}`}
                 >
-                  <span className="text-lg sm:text-xl font-black tashkeel-text block">
+                  <span className="text-base sm:text-lg font-black tashkeel-text block">
                     {opt.text}
                   </span>
                   
                   {isAnswered && opt.isCorrect && (
-                    <span className="text-xs text-emerald-700 font-bold flex items-center gap-1">
-                      <CheckCircle2 className="w-4 h-4" />
+                    <span className="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                       إِجَابَةٌ صَحِيحَةٌ!
                     </span>
                   )}
                   {isAnswered && isSelected && !opt.isCorrect && (
-                    <span className="text-xs text-rose-700 font-bold flex items-center gap-1">
-                      <XCircle className="w-4 h-4" />
+                    <span className="text-[11px] text-rose-700 font-bold flex items-center gap-1">
+                      <XCircle className="w-3.5 h-3.5" />
                       إِجَابَةٌ خَاطِئَةٌ
                     </span>
                   )}
@@ -188,21 +185,21 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
             })}
           </div>
 
-          {/* Explanation & Next */}
+          {/* Explanation & Next (flex-shrink: 0) */}
           {isAnswered && (
-            <div className="p-4 bg-indigo-50 border-2 border-indigo-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-right">
-              <div className="flex-1 space-y-1">
-                <span className="text-xs font-black text-indigo-900 block">
+            <div className="p-2.5 bg-indigo-50 border border-indigo-200 rounded-xl flex items-center justify-between gap-2 text-right flex-shrink-0">
+              <div className="flex-1">
+                <span className="text-[11px] font-black text-indigo-900 block">
                   💡 تَوْضِيحُ الْإِجَابَةِ:
                 </span>
-                <p className="text-xs sm:text-sm font-bold text-slate-800 tashkeel-text">
+                <p className="text-xs font-bold text-slate-800 tashkeel-text leading-tight">
                   {selectedOptId && question.options.find(o => o.id === selectedOptId)?.explanation}
                 </p>
               </div>
 
               <button
                 onClick={handleNext}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md hover:scale-105 transition-all shrink-0"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-xs hover:scale-105 transition-all shrink-0"
                 id="btn-next-quiz-q"
               >
                 السُّؤَالُ التَّالِي ⬅️
@@ -213,35 +210,35 @@ export const QuizView: React.FC<QuizViewProps> = ({ onEarnStars, onOpenCertifica
         </div>
       ) : (
         /* Quiz Complete Screen */
-        <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border-3 border-indigo-300 rounded-3xl p-7 text-center space-y-5 max-w-lg mx-auto shadow-md">
-          <div className="w-20 h-20 bg-indigo-600 text-white rounded-3xl flex items-center justify-center text-4xl mx-auto shadow-lg">
+        <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 border-2 border-indigo-300 rounded-2xl p-5 text-center space-y-3 max-w-sm mx-auto shadow-xs my-auto flex-shrink-1">
+          <div className="w-14 h-14 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-3xl mx-auto shadow-xs">
             🏆
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-black text-indigo-950 font-readex">
+          <h3 className="text-lg sm:text-xl font-black text-indigo-950 font-readex">
             مَبْرُوكٌ يَا بَطَلَ الِاخْتِبَارِ!
           </h3>
 
-          <p className="text-indigo-900 font-bold text-sm sm:text-base tashkeel-text">
-            نَتِيجَتُكَ: <span className="text-indigo-700 font-black text-lg">{score} مِنْ {QUIZ_QUESTIONS.length}</span> إِجَابَاتٍ صَحِيحَةٍ!
+          <p className="text-indigo-900 font-bold text-xs tashkeel-text">
+            نَتِيجَتُكَ: <span className="text-indigo-700 font-black text-sm">{score} مِنْ {QUIZ_QUESTIONS.length}</span> إِجَابَاتٍ صَحِيحَةٍ!
           </p>
 
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-2 pt-1">
             <button
               onClick={onOpenCertificate}
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold text-sm px-5 py-3 rounded-2xl shadow-md flex items-center gap-2 hover:scale-105 transition-all"
+              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-xs flex items-center gap-1.5 hover:scale-105 transition-all"
               id="btn-view-cert-after-quiz"
             >
-              <Award className="w-5 h-5 text-yellow-200" />
-              <span>عَرْضُ شَهَادَةِ التَّفَوُّقِ</span>
+              <Award className="w-4 h-4 text-yellow-200" />
+              <span>شَهَادَةُ التَّفَوُّقِ</span>
             </button>
 
             <button
               onClick={handleRestartQuiz}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm px-4 py-3 rounded-2xl flex items-center gap-2 shadow-md hover:scale-105 transition-all"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs px-3.5 py-2.5 rounded-xl flex items-center gap-1 shadow-xs hover:scale-105 transition-all"
               id="btn-restart-quiz"
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw className="w-3.5 h-3.5" />
               <span>إِعَادَةُ الِاخْتِبَارِ</span>
             </button>
           </div>

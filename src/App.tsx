@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
+import { BottomNav } from './components/BottomNav';
 import { HomeView } from './components/HomeView';
 import { LessonsView } from './components/LessonsView';
 import { SortingGame } from './components/SortingGame';
@@ -61,9 +62,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-amber-50/40 text-slate-800 flex flex-col font-readex" id="app-root">
-      
-      {/* Top Navbar with score, sound control, and navigation */}
+    <div
+      className="app-viewport-wrapper bg-amber-50/40 text-slate-800 flex flex-col justify-between font-readex h-[100dvh] max-h-[100dvh] w-full overflow-hidden"
+      id="app-root"
+    >
+      {/* 1. Header stays at the top (flex-shrink: 0) */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -73,10 +76,11 @@ export default function App() {
         onOpenCertificate={() => setShowCertificate(true)}
       />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-6">
-        
-        {/* Tab Views */}
+      {/* 2. Main content card/area occupies remaining space (flex: 1; min-height: 0; max-width: 900px;) */}
+      <main
+        className="app-main-content w-full max-w-[900px] mx-auto px-2.5 sm:px-4 py-1.5 sm:py-2 flex-1 flex flex-col min-h-0 overflow-y-auto"
+        id="main-content"
+      >
         {activeTab === 'home' && (
           <HomeView
             setActiveTab={setActiveTab}
@@ -120,8 +124,10 @@ export default function App() {
             onOpenCertificate={() => setShowCertificate(true)}
           />
         )}
-
       </main>
+
+      {/* 3. Bottom navigation bar sticks to the absolute bottom (flex-shrink: 0) */}
+      <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Printable Certificate Modal */}
       {showCertificate && (
@@ -130,16 +136,7 @@ export default function App() {
           onClose={() => setShowCertificate(false)}
         />
       )}
-
-      {/* Footer */}
-      <footer className="bg-white border-t border-amber-200 py-4 px-4 text-center text-sm text-amber-900 font-bold print:hidden" id="app-footer">
-        <div className="max-w-7xl mx-auto flex items-center justify-center text-center">
-          <p className="text-amber-950 font-bold tracking-wide text-xs sm:text-sm">
-            بستان الاسماء . التعلم الممتع . سميرة عبد الصدوق . جميع الحقوق محفوظة &copy; 2026
-          </p>
-        </div>
-      </footer>
-
     </div>
   );
 }
+
