@@ -98,9 +98,6 @@ export const SortingGame: React.FC<SortingGameProps> = ({ onEarnStars }) => {
       {/* Header & Instructions */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-right">
         <div>
-          <span className="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-extrabold border border-emerald-300 inline-block mb-1">
-            لُعْبَةُ التَّصْنِيفِ التَّفَاعُلِيَّةِ
-          </span>
           <h2 className="text-xl sm:text-2xl font-black text-emerald-950 font-readex">
             سِلَالُ الْأَسْمَاءِ الْعَجِيبَةُ 🧺
           </h2>

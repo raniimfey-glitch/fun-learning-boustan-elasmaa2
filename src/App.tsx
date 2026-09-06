@@ -5,7 +5,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { Mascot } from './components/Mascot';
 import { HomeView } from './components/HomeView';
 import { LessonsView } from './components/LessonsView';
 import { SortingGame } from './components/SortingGame';
@@ -61,54 +60,6 @@ export default function App() {
     });
   };
 
-  // Dynamic mascot contextual message based on current screen
-  const getMascotMessage = (): { text: string; voice: string } => {
-    switch (activeTab) {
-      case 'home':
-        return {
-          text: 'أَهْلاً بِكَ فِي بُسْتَانِ الْأَسْمَاءِ! اخْتَرْ دَرْساً أَوْ لُعْبَةً لِنَبْدَأَ مَغَامَرَةَ التَّعَلُّمِ!',
-          voice: 'أَهْلاً بِكَ فِي بُسْتَانِ الْأَسْمَاءِ! اخْتَرْ دَرْساً أَوْ لُعْبَةً لِنَبْدَأَ مَغَامَرَةَ التَّعَلُّمِ!'
-        };
-      case 'lessons':
-        return {
-          text: 'الِاسْمُ كَلِمَةٌ لَطِيفَةٌ نُسَمِّي بِهَا: إِنْسَاناً، أَوْ حَيَوَاناً، أَوْ نَبَاتاً، أَوْ جَمَاداً، أَوْ مَكَاناً. اضْغَطْ عَلَى الْبِطَاقَاتِ لِتَسْتَمِعَ لَهَا!',
-          voice: 'الِاسْمُ كَلِمَةٌ نُسَمِّي بِهَا: إِنْسَاناً، أَوْ حَيَوَاناً، أَوْ نَبَاتاً، أَوْ جَمَاداً، أَوْ مَكَاناً.'
-        };
-      case 'sorting':
-        return {
-          text: 'سَاعِدْنِي فِي فَرْزِ الْأَسْمَاءِ فِي سِلَالِهَا الْمُنَاسِبَةِ! ضَعْ كُلَّ كَلِمَةٍ فِي سَلَّتِهَا الصَّحِيحَةِ.',
-          voice: 'سَاعِدْنِي فِي فَرْزِ الْأَسْمَاءِ فِي سِلَالِهَا الْمُنَاسِبَةِ!'
-        };
-      case 'signs':
-        return {
-          text: 'لِلِاسْمِ عَلَامَاتٌ سِحْرِيَّةٌ مِثْلَ: (الْـ) التَّعْرِيفِ، وَالتَّنْوِينِ، وَالتَّاءِ الْمَرْبُوطَةِ. جَرِّبِ الْمُخْتَبَرَ السِّحْرِيَّ!',
-          voice: 'لِلِاسْمِ عَلَامَاتٌ سِحْرِيَّةٌ مِثْلَ: الْـ التَّعْرِيفِ، وَالتَّنْوِينِ، وَالتَّاءِ الْمَرْبُوطَةِ.'
-        };
-      case 'hunter':
-        return {
-          text: 'انْتَبِهْ جَيِّداً! اصْطَدِ الْأَسْمَاءَ فَقَطْ وَابْتَعِدْ عَنِ الْأَفْعَالِ وَالْحُرُوفِ لِتَكُونَ الصَّيَّادَ الْأَوَّلَ!',
-          voice: 'اصْطَدِ الْأَسْمَاءَ فَقَطْ وَابْتَعِدْ عَنِ الْأَفْعَالِ وَالْحُرُوفِ!'
-        };
-      case 'story':
-        return {
-          text: 'اقْرَأِ الْقِصَّةَ الْجَمِيلَةَ وَاضْغَطْ عَلَى الْكَلِمَاتِ لِاسْتِخْرَاجِ الْأَسْمَاءِ الْمُخْتَبِئَةِ فِيهَا!',
-          voice: 'اقْرَأِ الْقِصَّةَ الْجَمِيلَةَ وَاضْغَطْ عَلَى الْكَلِمَاتِ لِاسْتِخْرَاجِ الْأَسْمَاءِ مِنْهَا!'
-        };
-      case 'quiz':
-        return {
-          text: 'هَيَّا يَا بَطَل! أَجِبْ عَنِ الْأَسْئِلَةِ الذَّكِيَّةِ وَاِجْمَعِ النُّجُومَ لِتَحْصُلَ عَلَى شَهَادَةِ التَّفَوُّقِ!',
-          voice: 'أَجِبْ عَنِ الْأَسْئِلَةِ الذَّكِيَّةِ وَاِجْمَعِ النُّجُومَ لِتَحْصُلَ عَلَى شَهَادَةِ التَّفَوُّقِ!'
-        };
-      case 'rewards':
-        return {
-          text: 'هَذِهِ خِزَانَةُ إِنْجَازَاتِكَ الرَّائِعَةِ! انْظُرْ كَمْ نَجْمَةً جَمَعْتَ وَكَمْ وَسَاماً فَتَحْتَ!',
-          voice: 'هَذِهِ خِزَانَةُ إِنْجَازَاتِكَ الرَّائِعَةِ!'
-        };
-    }
-  };
-
-  const mascotMsg = getMascotMessage();
-
   return (
     <div className="min-h-screen bg-amber-50/40 text-slate-800 flex flex-col font-readex" id="app-root">
       
@@ -125,12 +76,6 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-6">
         
-        {/* Animated Kid-Friendly Mascot Guide */}
-        <Mascot
-          message={mascotMsg.text}
-          onSpeakText={mascotMsg.voice}
-        />
-
         {/* Tab Views */}
         {activeTab === 'home' && (
           <HomeView

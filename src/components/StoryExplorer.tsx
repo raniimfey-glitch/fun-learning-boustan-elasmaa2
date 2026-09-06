@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, Sparkles, CheckCircle2, BookOpen, Star, RefreshCw } from 'lucide-react';
+import { Volume2, Sparkles, Star, RefreshCw } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { STORIES_DATA, StoryParagraph, StoryWordItem } from '../data/nounsData';
 import { soundManager } from '../utils/audio';
@@ -82,55 +82,13 @@ export const StoryExplorer: React.FC<StoryExplorerProps> = ({ onEarnStars }) => 
     <div className="bg-white rounded-3xl p-5 sm:p-7 border-2 border-rose-200 shadow-sm space-y-6" id="story-explorer-container">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-right">
-        <div>
-          <span className="bg-rose-100 text-rose-800 text-xs px-2.5 py-0.5 rounded-full font-extrabold border border-rose-300 inline-block mb-1">
-            مُسْتَكْشِفُ الْقِصَّةِ الْمُصَوَّرَةِ (10 قِصَصٍ مُمْتِعَةٍ)
-          </span>
-          <h2 className="text-xl sm:text-2xl font-black text-rose-950 font-readex">
-            حِكَايَاتُ بُسْتَانِ الْأَسْمَاءِ 📖
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-sm font-semibold">
-            اسْتَمِعْ لِلْقِصَّةِ، ثُمَّ اضْغَطْ عَلَى الْكَلِمَاتِ لِتَسْتَخْرِجَ الْأَسْمَاءَ مِنْهَا:
-          </p>
-        </div>
-
-        {/* Counter badge */}
-        <div className="bg-amber-100 border border-amber-300 text-amber-950 px-3 py-1.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 shrink-0">
-          <BookOpen className="w-4 h-4 text-amber-600" />
-          <span>الْقِصَّةُ {selectedStoryIdx + 1} مِنْ {STORIES_DATA.length}</span>
-        </div>
-      </div>
-
-      {/* Story Selector Pills (10 Stories Grid) */}
-      <div className="bg-rose-50/60 p-3 rounded-2xl border border-rose-200 flex flex-wrap gap-2 items-center justify-center">
-        {STORIES_DATA.map((s, idx) => {
-          const isDone = (discoveredNouns[s.id]?.size || 0) >= s.words.filter(w => w.isNoun).length && s.words.filter(w => w.isNoun).length > 0;
-          const isCurrent = selectedStoryIdx === idx;
-          return (
-            <button
-              key={s.id}
-              onClick={() => {
-                soundManager.playPop();
-                setSelectedStoryIdx(idx);
-                setActiveWordInfo(null);
-                soundManager.speakArabic(s.title);
-              }}
-              className={`px-3 py-1.5 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 ${
-                isCurrent
-                  ? 'bg-rose-500 text-white shadow-md scale-105 ring-2 ring-rose-300'
-                  : isDone
-                  ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 hover:bg-emerald-200'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:bg-rose-100'
-              }`}
-              id={`btn-story-select-${s.id}`}
-            >
-              <span>{s.sceneImage.slice(0, 2)}</span>
-              <span>قِصَّةُ {idx + 1}</span>
-              {isDone && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
-            </button>
-          );
-        })}
+      <div className="text-right">
+        <h2 className="text-xl sm:text-2xl font-black text-rose-950 font-readex">
+          حِكَايَاتُ بُسْتَانِ الْأَسْمَاءِ 📖
+        </h2>
+        <p className="text-slate-600 text-xs sm:text-sm font-semibold">
+          اسْتَمِعْ لِلْقِصَّةِ، ثُمَّ اضْغَطْ عَلَى الْكَلِمَاتِ لِتَسْتَخْرِجَ الْأَسْمَاءَ مِنْهَا:
+        </p>
       </div>
 
       {/* Story Board Area */}

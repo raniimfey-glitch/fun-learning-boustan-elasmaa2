@@ -135,8 +135,8 @@ export const CertificateView: React.FC<CertificateViewProps> = ({ stars, onClose
               </div>
 
               <div className="text-left">
-                <span className="block text-[11px] text-slate-400">مُرْشِدُ اللُّغَةِ:</span>
-                <span className="text-amber-900 font-extrabold">سِنْجُوب الذَّكِيُّ 🐿️</span>
+                <span className="block text-[11px] text-slate-400">مُعَلِّمُ اللُّغَةِ:</span>
+                <span className="text-amber-900 font-extrabold">بُسْتَانُ الْأَسْمَاءِ 🌟</span>
               </div>
             </div>
 

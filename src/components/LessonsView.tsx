@@ -15,6 +15,57 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
   const [exploredItems, setExploredItems] = useState<Set<string>>(new Set(['h1']));
   const [appliedSign, setAppliedSign] = useState<string | null>(null);
 
+  // Alternating representative examples across all 5 noun categories
+  const conceptExamples = [
+    NOUN_ITEMS[0],  // طَالِبٌ - إنسان
+    NOUN_ITEMS[4],  // أَسَدٌ - حيوان
+    NOUN_ITEMS[8],  // شَجَرَةٌ - نبات
+    NOUN_ITEMS[12], // قَلَمٌ - جماد
+    NOUN_ITEMS[17], // مَدْرَسَةٌ - مكان
+    NOUN_ITEMS[1],  // مُعَلِّمَةٌ - إنسان
+    NOUN_ITEMS[5],  // زَرَافَةٌ - حيوان
+    NOUN_ITEMS[9],  // زَهْرَةٌ - نبات
+    NOUN_ITEMS[13], // كِتَابٌ - جماد
+    NOUN_ITEMS[16], // حَدِيقَةٌ - مكان
+    NOUN_ITEMS[2],  // طَبِيبٌ - إنسان
+    NOUN_ITEMS[6],  // عُصْفُورٌ - حيوان
+    NOUN_ITEMS[10], // نَخْلَةٌ - نبات
+    NOUN_ITEMS[14], // كُرَةٌ - جماد
+    NOUN_ITEMS[18], // مَسْجِدٌ - مكان
+    NOUN_ITEMS[3],  // أَحْمَدُ - إنسان
+    NOUN_ITEMS[7],  // أَرْنَبٌ - حيوان
+    NOUN_ITEMS[11], // تُفَّاحَةٌ - نبات
+    NOUN_ITEMS[15], // حَقِيبَةٌ - جماد
+    NOUN_ITEMS[19], // بَيْتٌ - مكان
+  ].filter(Boolean);
+
+  const [conceptExampleIdx, setConceptExampleIdx] = useState<number>(0);
+
+  const handleNextConceptExample = () => {
+    soundManager.playPop();
+    const nextIdx = (conceptExampleIdx + 1) % conceptExamples.length;
+    setConceptExampleIdx(nextIdx);
+    const nextWord = conceptExamples[nextIdx];
+    setActiveWord(nextWord);
+    soundManager.speakArabic(`${nextWord.word}: ${nextWord.categoryNameAr}`);
+
+    if (!exploredItems.has(nextWord.id)) {
+      const next = new Set(exploredItems);
+      next.add(nextWord.id);
+      setExploredItems(next);
+      onEarnStar(1);
+    }
+  };
+
+  const handlePrevConceptExample = () => {
+    soundManager.playPop();
+    const prevIdx = (conceptExampleIdx - 1 + conceptExamples.length) % conceptExamples.length;
+    setConceptExampleIdx(prevIdx);
+    const prevWord = conceptExamples[prevIdx];
+    setActiveWord(prevWord);
+    soundManager.speakArabic(`${prevWord.word}: ${prevWord.categoryNameAr}`);
+  };
+
   const categories: { id: NounCategory; label: string; icon: string; color: string }[] = [
     { id: 'human', label: 'اسْمُ إِنْسَانٍ', icon: '👦', color: 'bg-amber-100 text-amber-900 border-amber-300' },
     { id: 'animal', label: 'اسْمُ حَيَوَانٍ', icon: '🦁', color: 'bg-yellow-100 text-yellow-900 border-yellow-300' },
@@ -125,56 +176,50 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
             </button>
           </div>
 
-          {/* 5 Visual Pillars of Nouns */}
-          <div>
-            <h3 className="text-base sm:text-lg font-black text-slate-800 mb-3 text-right">
-              🌟 اضْغَطْ عَلَى الْأَمْثِلَةِ وَاسْتَمِعْ لِنُطْقِهَا:
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {categories.map(cat => {
-                const sampleWord = NOUN_ITEMS.find(n => n.category === cat.id);
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => sampleWord && handleSelectWord(sampleWord)}
-                    className="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-amber-400 hover:bg-amber-50/50 hover:shadow-md transition-all text-center group"
-                    id={`btn-sample-cat-${cat.id}`}
-                  >
-                    <span className="text-4xl block mb-2 group-hover:scale-110 transition-transform">
-                      {cat.icon}
-                    </span>
-                    <span className="block font-black text-xs text-slate-500 mb-1">
-                      {cat.label}
-                    </span>
-                    <span className="block font-black text-lg text-amber-950 tashkeel-text">
-                      {sampleWord?.word}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          {/* Interactive Example Showcase with Next Button Navigation */}
+          <div className="bg-gradient-to-br from-amber-50 via-white to-orange-50 border-3 border-amber-300 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+            
+            {/* Top info and counter */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-200/80 pb-4">
+              <div className="flex items-center gap-2">
+                <span className="bg-amber-200 text-amber-950 text-xs sm:text-sm px-3 py-1 rounded-full font-black border border-amber-300">
+                  {activeWord.categoryNameAr}
+                </span>
+                <span className="text-xs sm:text-sm text-slate-500 font-bold">
+                  {activeWord.meaning}
+                </span>
+              </div>
 
-          {/* Active Word Spotlight Card */}
-          <div className="bg-gradient-to-br from-amber-50 via-white to-orange-50 border-2 border-amber-300 rounded-3xl p-5 sm:p-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-4xl sm:text-5xl shadow-md border-2 border-white">
+              <div className="bg-amber-100 text-amber-950 border border-amber-300 px-3.5 py-1 rounded-2xl text-xs font-black">
+                <span>مِثَالٌ {conceptExampleIdx + 1} مِنْ {conceptExamples.length}</span>
+              </div>
+            </div>
+
+            {/* Central Word Presentation */}
+            <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-right">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-5xl sm:text-6xl shadow-md border-4 border-white shrink-0">
                 {activeWord.icon}
               </div>
-              <div className="flex-1 space-y-1.5">
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <span className="bg-amber-200 text-amber-900 text-xs px-2.5 py-0.5 rounded-full font-black border border-amber-300">
-                    {activeWord.categoryNameAr}
-                  </span>
-                  <span className="text-xs text-slate-500 font-bold">
-                    {activeWord.meaning}
-                  </span>
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center justify-center sm:justify-start gap-3">
+                  <h4 className="text-3xl sm:text-4xl font-black text-amber-950 tashkeel-text">
+                    {activeWord.word}
+                  </h4>
+                  <button
+                    onClick={() => {
+                      soundManager.playPop();
+                      soundManager.speakArabic(activeWord.word);
+                    }}
+                    className="p-2.5 rounded-2xl bg-amber-200 hover:bg-amber-300 text-amber-950 transition-all hover:scale-105 shadow-xs"
+                    title="اسْتَمِعْ لِنُطْقِ الْكَلِمَةِ"
+                    id="btn-speak-active-word"
+                  >
+                    <Volume2 className="w-5 h-5" />
+                  </button>
                 </div>
-                <h4 className="text-2xl sm:text-3xl font-black text-amber-950 tashkeel-text">
-                  {activeWord.word}
-                </h4>
-                <div className="p-3 bg-white/80 rounded-2xl border border-amber-200 flex items-center justify-between gap-3">
-                  <p className="text-xs sm:text-sm font-bold text-slate-800 tashkeel-text flex-1">
+
+                <div className="p-3.5 bg-white rounded-2xl border border-amber-200 flex items-center justify-between gap-3 shadow-xs">
+                  <p className="text-sm sm:text-base font-bold text-slate-800 tashkeel-text flex-1">
                     جُمْلَةٌ: «{activeWord.exampleSentence}»
                   </p>
                   <button
@@ -188,6 +233,26 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
                 </div>
               </div>
             </div>
+
+            {/* Navigation Buttons: السابق and التالي */}
+            <div className="flex items-center justify-between gap-3 pt-3 border-t border-amber-200/80">
+              <button
+                onClick={handlePrevConceptExample}
+                className="px-5 py-2.5 rounded-2xl font-black text-xs sm:text-sm bg-white hover:bg-amber-100 text-amber-900 border border-amber-300 shadow-xs hover:scale-105 transition-all flex items-center gap-2"
+                id="btn-prev-example"
+              >
+                <span>➡️ الْمِثَالُ السَّابِقُ</span>
+              </button>
+
+              <button
+                onClick={handleNextConceptExample}
+                className="px-6 py-2.5 rounded-2xl font-black text-sm sm:text-base bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-md hover:scale-105 transition-all flex items-center gap-2 ring-2 ring-amber-300/60"
+                id="btn-next-example"
+              >
+                <span>الْمِثَالُ التَّالِي ⬅️</span>
+              </button>
+            </div>
+
           </div>
         </div>
       )}
