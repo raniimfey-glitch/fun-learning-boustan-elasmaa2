@@ -77,7 +77,7 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
   const handleSelectWord = (item: NounItem) => {
     soundManager.playPop();
     setActiveWord(item);
-    soundManager.speakArabic(item.word);
+    soundManager.speakArabic(`${item.word}: ${item.categoryNameAr}`);
 
     if (!exploredItems.has(item.id)) {
       const next = new Set(exploredItems);
@@ -178,22 +178,6 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
 
           {/* Interactive Example Showcase with Next Button Navigation */}
           <div className="bg-gradient-to-br from-amber-50 via-white to-orange-50 border-3 border-amber-300 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-            
-            {/* Top info and counter */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-200/80 pb-4">
-              <div className="flex items-center gap-2">
-                <span className="bg-amber-200 text-amber-950 text-xs sm:text-sm px-3 py-1 rounded-full font-black border border-amber-300">
-                  {activeWord.categoryNameAr}
-                </span>
-                <span className="text-xs sm:text-sm text-slate-500 font-bold">
-                  {activeWord.meaning}
-                </span>
-              </div>
-
-              <div className="bg-amber-100 text-amber-950 border border-amber-300 px-3.5 py-1 rounded-2xl text-xs font-black">
-                <span>مِثَالٌ {conceptExampleIdx + 1} مِنْ {conceptExamples.length}</span>
-              </div>
-            </div>
 
             {/* Central Word Presentation */}
             <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-right">
@@ -208,7 +192,7 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
                   <button
                     onClick={() => {
                       soundManager.playPop();
-                      soundManager.speakArabic(activeWord.word);
+                      soundManager.speakArabic(`${activeWord.word}: ${activeWord.categoryNameAr}`);
                     }}
                     className="p-2.5 rounded-2xl bg-amber-200 hover:bg-amber-300 text-amber-950 transition-all hover:scale-105 shadow-xs"
                     title="اسْتَمِعْ لِنُطْقِ الْكَلِمَةِ"
@@ -337,7 +321,7 @@ export const LessonsView: React.FC<LessonsViewProps> = ({ onEarnStar }) => {
                       onClick={(e) => {
                         e.stopPropagation();
                         soundManager.playPop();
-                        soundManager.speakArabic(item.word);
+                        soundManager.speakArabic(`${item.word}: ${item.categoryNameAr}`);
                       }}
                       className="p-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 transition-colors"
                       title="نُطْقُ الْكَلِمَةِ"

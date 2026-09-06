@@ -210,6 +210,8 @@ class SoundSystem {
 
     // 1. Convert isolated grammar notation & symbols to friendly spoken words
     text = text
+      .replace(/أَسَدٌ?\s*[:،,-]?\s*(?:حَيَوَانٌ?|حَيَوَانٍ?)/g, 'أَسَدٌ: اسْمُ حَيَوَانٍ')
+      .replace(/اسد\s*[:،,-]?\s*حيوان/g, 'أَسَدٌ: اسْمُ حَيَوَانٍ')
       .replace(/\(\s*الْـ\s*\)/g, 'أَلْ التَّعْرِيفِ')
       .replace(/الْـ\s*التَّعْرِيف/g, 'أَلْ التَّعْرِيفِ')
       .replace(/الْـ/g, 'أَلْ ')
