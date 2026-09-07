@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, RotateCcw, Sparkles, CheckCircle2, AlertCircle, Award } from 'lucide-react';
+import { Volume2, RotateCcw, Sparkles, CheckCircle2, AlertCircle, Award, ArrowLeft } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { NOUN_ITEMS } from '../data/nounsData';
 import { NounCategory, NounItem } from '../types';
@@ -41,11 +41,10 @@ export const SortingGame: React.FC<SortingGameProps> = ({ onEarnStars }) => {
         isCorrect: true
       });
 
-      soundManager.speakArabic(`أَحْسَنْتَ! ${currentWord.word} هِيَ ${currentWord.categoryNameAr}`);
+      soundManager.speakArabic(`أَحْسَنْتَ! كَلِمَةُ ${currentWord.word} هِيَ ${currentWord.categoryNameAr}`);
 
-      setTimeout(() => {
-        moveToNext();
-      }, 1600);
+      // Do NOT automatically transition so the full explanation audio finishes
+      // Transition is controlled via the "التَّالِي" button
 
     } else {
       // Friendly wrong
@@ -150,21 +149,49 @@ export const SortingGame: React.FC<SortingGameProps> = ({ onEarnStars }) => {
               </button>
             </div>
 
-            {/* Live Feedback Toast */}
+            {/* Live Feedback Toast & Next Button */}
             {feedback && (
               <div
-                className={`mt-2 p-1.5 rounded-xl border text-xs font-black flex items-center justify-center gap-1.5 animate-bounce-slow ${
+                className={`mt-2 p-2 rounded-xl border text-xs font-black flex flex-col items-center justify-center gap-1.5 transition-all ${
                   feedback.isCorrect
-                    ? 'bg-emerald-100 border-emerald-400 text-emerald-900'
-                    : 'bg-rose-100 border-rose-400 text-rose-900'
+                    ? 'bg-emerald-100/90 border-emerald-400 text-emerald-950 shadow-xs'
+                    : 'bg-rose-100 border-rose-400 text-rose-900 animate-bounce-slow'
                 }`}
               >
-                {feedback.isCorrect ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                ) : (
-                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                <div className="flex items-center justify-center gap-1.5">
+                  {feedback.isCorrect ? (
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  ) : (
+                    <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                  )}
+                  <span className="tashkeel-text leading-tight">{feedback.message}</span>
+                </div>
+
+                {feedback.isCorrect && (
+                  <div className="flex items-center justify-center gap-2 mt-1 w-full pt-1 border-t border-emerald-200/80">
+                    <button
+                      onClick={() => {
+                        soundManager.playPop();
+                        soundManager.speakArabic(`أَحْسَنْتَ! كَلِمَةُ ${currentWord.word} هِيَ ${currentWord.categoryNameAr}`);
+                      }}
+                      className="bg-emerald-200 hover:bg-emerald-300 text-emerald-950 font-bold text-[11px] px-2.5 py-1.5 rounded-lg flex items-center gap-1 transition-colors"
+                      title="اسْتَمِعْ لِلشَّرْحِ مَرَّةً أُخْرَى"
+                      id="btn-re-listen-sorting-explanation"
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                      <span>إِعَادَةُ الشَّرْحِ</span>
+                    </button>
+
+                    <button
+                      onClick={moveToNext}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm px-4 py-1.5 rounded-xl shadow-xs flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all"
+                      id="btn-sorting-next-word"
+                    >
+                      <span>الْكَلِمَةُ التَّالِيَةُ</span>
+                      <ArrowLeft className="w-4 h-4" />
+                    </button>
+                  </div>
                 )}
-                <span>{feedback.message}</span>
               </div>
             )}
 
