@@ -341,7 +341,7 @@ export const HUNTER_WORDS: HunterWord[] = [
   { id: 'w1', word: 'عُصْفُورٌ', isNoun: true, typeDesc: 'اسْمُ طَائِرٍ', reason: 'يَقْبَلُ التَّنْوِينَ وَالْـ التَّعْرِيفِ', emoji: '🐦' },
   { id: 'w2', word: 'يَكْتُبُ', isNoun: false, typeDesc: 'فِعْلٌ مُضَارِعٌ', reason: 'يَدُلُّ عَلَى عَمَلٍ فِي الزَّمَنِ الْحَاضِرِ', emoji: '✍️' },
   { id: 'w3', word: 'مَدْرَسَةٌ', isNoun: true, typeDesc: 'اسْمُ مَكَانٍ', reason: 'يَنْتَهِي بِتَاءِ مَرْبُوطَةٍ وَيَقْبَلُ الْـ', emoji: '🏫' },
-  { id: 'w4', word: 'فِي', isNoun: false, typeDesc: 'حَرْفُ جَرٍّ', reason: 'حَرْفٌ لَيْسَ لَهُ مَعْنًى بِمُفْرَدِهِ', emoji: '➡️' },
+  { id: 'w4', word: 'فِي', isNoun: false, typeDesc: 'حَرْفُ جَرٍّ', reason: 'حَرْفٌ لَيْسَ لَهُ مَعْنَى بِمُفْرَدِهِ', emoji: '➡️' },
   { id: 'w5', word: 'تُفَّاحَةٌ', isNoun: true, typeDesc: 'اسْمُ نَبَاتٍ', reason: 'يَدُلُّ عَلَى ثَمَرَةٍ وَيَنْتَهِي بِتَاءٍ مَرْبُوطَةٍ', emoji: '🍎' },
   { id: 'w6', word: 'لَعِبَ', isNoun: false, typeDesc: 'فِعْلٌ مَاضٍ', reason: 'يَدُلُّ عَلَى حَرَكَةٍ وَعَمَلٍ فِي الْمَاضِي', emoji: '⚽' },
   { id: 'w7', word: 'طَبِيبٌ', isNoun: true, typeDesc: 'اسْمُ إِنْسَانٍ', reason: 'يَدُلُّ عَلَى مِهْنَةِ إِنْسَانٍ وَيَقْبَلُ التَّنْوِينَ', emoji: '👨‍⚕️' },
