@@ -200,8 +200,9 @@ class SoundSystem {
 
   /**
    * Enhanced Arabic phonetic preprocessor specially crafted for 2nd Grade Tanween & Grammar pronunciation.
-   * Ensures crystal clear Arabic pronunciation without double-nun (نونين) artifacts,
-   * properly vocalizes Ta Marbuta, and ensures words like 'مَعْنَى' are pronounced as 'مَعْنَى' (never 'معنن').
+   * Ensures crystal clear, single-nun Tanween pronunciation across all browser TTS voices,
+   * properly vocalizes Ta Marbuta as 'تُنْ / تَنْ / تِنْ', avoids doubling the Nun on words
+   * already ending in Nun (e.g. 'حَيَوَانٌ', 'إِنْسَانٌ', 'مَكَانٌ'), and ensures 'مَعْنَى' is pronounced 'مَعْنَى' (never 'معنن').
    */
   public prepareArabicForSpeech(rawText: string): string {
     if (!rawText) return '';
@@ -214,41 +215,68 @@ class SoundSystem {
       .replace(/\bمَعْنَنْ\b/g, 'مَعْنَى')
       .replace(/\bمعنن\b/g, 'مَعْنَى');
 
-    // 2. Convert isolated grammar notation & symbols to friendly spoken words
+    // 2. Convert 'الـ التعريف' and grammar symbols so 'التَّعْرِيفِ' is pronounced ONCE and NEVER repeated
     text = text
       .replace(/أَسَدٌ?\s*[:،,-]?\s*(?:حَيَوَانٌ?|حَيَوَانٍ?)/g, 'أَسَدٌ: اسْمُ حَيَوَانٍ')
       .replace(/اسد\s*[:،,-]?\s*حيوان/g, 'أَسَدٌ: اسْمُ حَيَوَانٍ')
-      .replace(/\(\s*الْـ\s*\)/g, 'أَلْ التَّعْرِيفِ')
-      .replace(/الْـ\s*التَّعْرِيف/g, 'أَلْ التَّعْرِيفِ')
-      .replace(/الْـ/g, 'أَلْ ')
+      .replace(/[\(\"«'”]\s*[اأإ][\u064B-\u0652]*ل[\u0640ـ\u064B-\u0652]*\s*[\)\"»'”]\s*[اأإ][\u064B-\u0652]*ل[\u0640\u064B-\u0652]*ت[\u0640\u064B-\u0652]*ع[\u0640\u064B-\u0652]*ر[\u0640\u064B-\u0652]*ي[\u0640\u064B-\u0652]*ف[\u0640\u064B-\u0652]*/g, 'أَلْ التَّعْرِيفِ')
+      .replace(/[اأإ][\u064B-\u0652]*ل[\u0640ـ\u064B-\u0652]*\s+[اأإ][\u064B-\u0652]*ل[\u0640\u064B-\u0652]*ت[\u0640\u064B-\u0652]*ع[\u0640\u064B-\u0652]*ر[\u0640\u064B-\u0652]*ي[\u0640\u064B-\u0652]*ف[\u0640\u064B-\u0652]*/g, 'أَلْ التَّعْرِيفِ')
+      .replace(/[\(\"«'”]\s*[اأإ][\u064B-\u0652]*ل[\u0640ـ\u064B-\u0652]*\s*[\)\"»'”]/g, 'أَلْ التَّعْرِيفِ')
+      .replace(/\bالْـ\b|\bالـ\b/g, 'أَلْ ')
+      .replace(/(?:[اأإ][\u064B-\u0652]*ل[\u0640\u064B-\u0652]*ت[\u0640\u064B-\u0652]*ع[\u0640\u064B-\u0652]*ر[\u0640\u064B-\u0652]*ي[\u0640\u064B-\u0652]*ف[\u0640\u064B-\u0652]*\s*){2,}/g, 'التَّعْرِيفِ ')
       .replace(/\(\s*ـة\s*\/\s*ة\s*\)/g, 'التَّاءُ الْمَرْبُوطَةُ')
       .replace(/\(\s*ـة\s*\)/g, 'التَّاءُ الْمَرْبُوطَةُ')
       .replace(/\(\s*[\u064C\u064B\u064D\s،,]+\)/g, 'تَنْوِينُ الضَّمِّ وَالْفَتْحِ وَالْكَسْرِ')
-      .replace(/\(\s*[\u0640ـ]*\u064C\s*\)/g, 'تَنْوِينُ الضَّمِّ')
-      .replace(/\(\s*[\u0640ـ]*\u064B\s*\)/g, 'تَنْوِينُ الْفَتْحِ')
-      .replace(/\(\s*[\u0640ـ]*\u064D\s*\)/g, 'تَنْوِينُ الْكَسْرِ')
+      .replace(/\(\s*[\u0640ـ]*\u064C\s*\)/g, 'تَنْوِينُ الضَّمِّ، أُنْ')
+      .replace(/\(\s*[\u0640ـ]*\u064B\s*\)/g, 'تَنْوِينُ الْفَتْحِ، أَنْ')
+      .replace(/\(\s*[\u0640ـ]*\u064D\s*\)/g, 'تَنْوِينُ الْكَسْرِ، إِنْ')
       .replace(/ـٌ\s*ـً\s*ـٍ/g, 'تَنْوِينُ الضَّمِّ، وَتَنْوِينُ الْفَتْحِ، وَتَنْوِينُ الْكَسْرِ')
       .replace(/⬅️|->|←/g, '، يُصْبِحُ: ');
 
-    // 3. Prevent and clean up any double-nun (نونين) artifacts on words ending in Nun with Tanween
-    text = text
-      .replace(/نُنْ\b/g, 'نٌ')
-      .replace(/نِنْ\b/g, 'نٍ')
-      .replace(/نَنْ\b/g, 'نًا');
+    // 3. Prevent double-nun (نونين) on words whose root ends in the letter Nun (ن) with Tanween:
+    // e.g. حَيَوَانٌ -> حَيَوَانُ, اسْمُ حَيَوَانٍ -> اسْمُ حَيَوَانِ, حَيَوَاناً -> حَيَوَانَا
+    // This ensures only ONE Nun consonant is heard, never "حَيَوَانْ نُنْ"
+    text = text.replace(/ن[\u0651]?\u064C/g, 'نُ');
+    text = text.replace(/ن[\u0651]?\u064D/g, 'نِ');
+    text = text.replace(/ن[\u0651]?\u064B\u0627/g, 'نَا');
+    text = text.replace(/ن[\u0651]?\u0627\u064B/g, 'نَا');
+    text = text.replace(/ن[\u0651]?\u064B/g, 'نَ');
 
-    // 4. Vocalize Ta Marbuta cleanly as Taa with proper Harakah/Tanween without adding Nun letters
-    text = text
-      .replace(/([^\s\u064B-\u0652])\u0651[\u0629ـ]*\u0629\u064C/g, '$1َّتٌ')
-      .replace(/[\u0640]*\u0629\u064C/g, 'تٌ')
-      .replace(/([^\s\u064B-\u0652])\u0651[\u0629ـ]*\u0629\u064B/g, '$1َّتًا')
-      .replace(/[\u0640]*\u0629\u064B/g, 'تًا')
-      .replace(/([^\s\u064B-\u0652])\u0651[\u0629ـ]*\u0629\u064D/g, '$1َّتٍ')
-      .replace(/[\u0640]*\u0629\u064D/g, 'تٍ')
-      .replace(/[\u0640]*\u0629\u064F/g, 'تُ')
-      .replace(/[\u0640]*\u0629\u064E/g, 'تَ')
-      .replace(/[\u0640]*\u0629\u0650/g, 'تِ');
+    // 4. Ta Marbuta (ة) with Tanween -> تُنْ / تَنْ / تِنْ for crystal-clear single nunation
+    text = text.replace(/([^\s\u064B-\u0652])\u0651[\u0629ـ]*\u0629\u064C/g, '$1َّتُّنْ');
+    text = text.replace(/[\u0640]*\u0629\u064C/g, 'تُنْ');
+    text = text.replace(/([^\s\u064B-\u0652])\u0651[\u0629ـ]*\u0629\u064B/g, '$1َّتَّنْ');
+    text = text.replace(/[\u0640]*\u0629\u064B/g, 'تَنْ');
+    text = text.replace(/([^\s\u064B-\u0652])\u0651[\u0629ـ]*\u0629\u064D/g, '$1َّتِّنْ');
+    text = text.replace(/[\u0640]*\u0629\u064D/g, 'تِنْ');
 
-    // 5. Remove any leftover non-pronounceable markdown artifacts or symbols
+    // Ta Marbuta with single Harakah
+    text = text.replace(/[\u0640]*\u0629\u064F/g, 'تُ');
+    text = text.replace(/[\u0640]*\u0629\u064E/g, 'تَ');
+    text = text.replace(/[\u0640]*\u0629\u0650/g, 'تِ');
+
+    // 5. Regular Letters (EXCEPT Nun and Ta Marbuta) with Tanween Damm (ـٌ -> ـُنْ)
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u0651\u064C/g, '$1ُّـنْ');
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u064C/g, '$1ُنْ');
+
+    // 6. Regular Letters (EXCEPT Nun and Ta Marbuta) with Tanween Fath (ـّاً / ـًّا -> ـَّـنْ, ـَـنْ)
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u0651\u064B\u0627/g, '$1َّـنْ');
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u0651\u0627\u064B/g, '$1َّـنْ');
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u064B\u0627/g, '$1َنْ');
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u0627\u064B/g, '$1َنْ');
+    text = text.replace(/([ءأإؤئ])\u064B/g, '$1َنْ');
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u064B/g, '$1َنْ');
+
+    // 7. Regular Letters (EXCEPT Nun and Ta Marbuta) with Tanween Kasr (ـٍ -> ـِنْ)
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u0651\u064D/g, '$1ِّـنْ');
+    text = text.replace(/([^\s\u064B-\u0652\u0629\u0646])\u064D/g, '$1ِنْ');
+
+    // 8. Clean up any accidental double-nun patterns (e.g. نُنْ -> نُ)
+    text = text.replace(/نُنْ\b/g, 'نُ');
+    text = text.replace(/نِنْ\b/g, 'نِ');
+    text = text.replace(/نَنْ\b/g, 'نَا');
+
+    // 9. Remove any leftover non-pronounceable markdown artifacts or symbols
     text = text.replace(/[*#_~`«»]/g, ' ');
 
     return text.trim();
