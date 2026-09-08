@@ -122,10 +122,10 @@ export const SortingGame: React.FC<SortingGameProps> = ({ onEarnStars }) => {
       </div>
 
       {!isFinished ? (
-        <div className="flex-1 flex flex-col justify-between gap-2 min-h-0">
+        <div className="flex-1 flex flex-col justify-between gap-2.5 min-h-0">
           
-          {/* Active Word Display Card (flex-shrink: 1, fit-card-scale) */}
-          <div className="bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 border-2 border-amber-300 rounded-2xl p-3 sm:p-4 text-center relative shadow-xs max-w-sm mx-auto flex-shrink-1 w-full my-auto fit-card-scale">
+          {/* Active Word Display Card (elevated to the top) */}
+          <div className="bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 border-2 border-amber-300 rounded-2xl p-3 sm:p-4 text-center relative shadow-xs max-w-sm mx-auto flex-shrink-1 w-full mt-0 mb-auto fit-card-scale">
             
             <div className="text-4xl sm:text-5xl mb-1 animate-float select-none">
               {currentWord.icon}
@@ -197,27 +197,27 @@ export const SortingGame: React.FC<SortingGameProps> = ({ onEarnStars }) => {
 
           </div>
 
-          {/* 5 Sorting Baskets (flex-shrink: 0) */}
-          <div className="space-y-1 text-right flex-shrink-0">
-            <h4 className="text-xs font-extrabold text-slate-700">
+          {/* 5 Sorting Baskets (Enlarged and Prominent) */}
+          <div className="space-y-1.5 text-right flex-shrink-0 pt-1">
+            <h4 className="text-xs sm:text-sm font-extrabold text-slate-700">
               👇 إِلَى أَيِّ سَلَّةٍ تَنْتَمِي هَذِهِ الْكَلِمَةُ؟
             </h4>
-            <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
+            <div className="grid grid-cols-5 gap-2 sm:gap-3">
               {baskets.map(basket => (
                 <button
                   key={basket.id}
                   onClick={() => handleBasketClick(basket.id)}
                   disabled={feedback !== null && feedback.isCorrect}
-                  className={`p-2 sm:p-2.5 rounded-2xl border-2 transition-all flex flex-col items-center justify-center text-center shadow-xs group hover:scale-105 active:scale-95 ${basket.bg} ${basket.border}`}
+                  className={`p-2.5 sm:p-3.5 py-3 sm:py-4.5 rounded-2xl border-2 transition-all flex flex-col items-center justify-center text-center shadow-md group hover:scale-105 active:scale-95 ${basket.bg} ${basket.border}`}
                   id={`basket-btn-${basket.id}`}
                 >
-                  <span className="text-2xl sm:text-3xl block mb-0.5 group-hover:rotate-6 transition-transform">
+                  <span className="text-3xl sm:text-4xl md:text-5xl block mb-1 group-hover:rotate-6 transition-transform">
                     {basket.icon}
                   </span>
-                  <span className="text-[10px] font-bold text-slate-500 block">
+                  <span className="text-[11px] sm:text-xs font-extrabold text-slate-500 block">
                     سَلَّةُ:
                   </span>
-                  <span className={`text-xs sm:text-sm font-black font-readex tashkeel-text leading-tight ${basket.text}`}>
+                  <span className={`text-xs sm:text-base font-black font-readex tashkeel-text leading-tight ${basket.text}`}>
                     {basket.label}
                   </span>
                 </button>

@@ -130,10 +130,10 @@ export const NounHunterGame: React.FC<NounHunterGameProps> = ({ onEarnStars }) =
       </div>
 
       {!isGameOver ? (
-        <div className="flex-1 flex flex-col justify-between gap-2 max-w-md mx-auto w-full min-h-0">
+        <div className="flex-1 flex flex-col justify-between gap-2.5 max-w-md mx-auto w-full min-h-0">
           
-          {/* Target Word Floating Bubble Card (flex-shrink: 1, fit-card-scale) */}
-          <div className="bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 border-2 border-sky-300 rounded-2xl p-3 sm:p-4 text-center relative shadow-xs flex-shrink-1 my-auto w-full fit-card-scale">
+          {/* Target Word Floating Bubble Card (elevated to top) */}
+          <div className="bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 border-2 border-sky-300 rounded-2xl p-3 sm:p-4 text-center relative shadow-xs flex-shrink-1 mt-0 mb-auto w-full fit-card-scale">
             
             <span className="text-4xl sm:text-5xl block mb-1 animate-float select-none">
               {currentWord.emoji}
@@ -226,32 +226,32 @@ export const NounHunterGame: React.FC<NounHunterGameProps> = ({ onEarnStars }) =
 
           </div>
 
-          {/* 2 Big Action Buttons: YES (اسْم) vs NO (لَيْسَ اسْماً) - shown when question is active */}
+          {/* 2 Enlarged Action Buttons: YES (نَعَمْ! هِيَ اسْمٌ) vs NO (لَا! لَيْسَتِ اسْماً) */}
           {!feedback ? (
-            <div className="grid grid-cols-2 gap-3 flex-shrink-0">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 flex-shrink-0 pt-1">
               <button
                 onClick={() => handleAnswer(true)}
-                className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-b from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black text-sm sm:text-base shadow-md border border-emerald-300 flex flex-col items-center justify-center gap-1 hover:scale-105 active:scale-95 transition-all"
+                className="p-4 sm:p-5 min-h-[90px] sm:min-h-[115px] rounded-2xl bg-gradient-to-b from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black text-base sm:text-xl shadow-lg border-2 border-emerald-300 flex flex-col items-center justify-center gap-1.5 hover:scale-105 active:scale-95 transition-all"
                 id="btn-hunter-is-noun"
               >
-                <span className="text-2xl sm:text-3xl">🎯</span>
-                <span className="tashkeel-text">نَعَمْ! هِيَ اسْمٌ</span>
+                <span className="text-3xl sm:text-4xl">🎯</span>
+                <span className="tashkeel-text font-readex">نَعَمْ! هِيَ اسْمٌ</span>
               </button>
 
               <button
                 onClick={() => handleAnswer(false)}
-                className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-b from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-black text-sm sm:text-base shadow-md border border-rose-300 flex flex-col items-center justify-center gap-1 hover:scale-105 active:scale-95 transition-all"
+                className="p-4 sm:p-5 min-h-[90px] sm:min-h-[115px] rounded-2xl bg-gradient-to-b from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-black text-base sm:text-xl shadow-lg border-2 border-rose-300 flex flex-col items-center justify-center gap-1.5 hover:scale-105 active:scale-95 transition-all"
                 id="btn-hunter-not-noun"
               >
-                <span className="text-2xl sm:text-3xl">❌</span>
-                <span className="tashkeel-text">لَا! لَيْسَتِ اسْماً</span>
+                <span className="text-3xl sm:text-4xl">❌</span>
+                <span className="tashkeel-text font-readex">لَا! لَيْسَتِ اسْماً</span>
               </button>
             </div>
           ) : (
             <div className="text-center flex-shrink-0">
               <button
                 onClick={handleNextWord}
-                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-black text-xs sm:text-sm shadow-xs hover:scale-102 active:scale-98 transition-all flex items-center justify-center gap-1.5"
+                className="w-full py-3 px-5 rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-black text-sm sm:text-base shadow-md hover:scale-102 active:scale-98 transition-all flex items-center justify-center gap-2"
                 id="btn-bottom-next-hunter-word"
               >
                 <span>مُتَابَعَةُ الصَّيْدِ (الْكَلِمَةُ التَّالِيَةُ)</span>

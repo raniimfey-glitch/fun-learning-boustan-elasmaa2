@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, Sparkles, Star, RefreshCw } from 'lucide-react';
+import { Volume2, RefreshCw } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { STORIES_DATA, StoryParagraph, StoryWordItem } from '../data/nounsData';
 import { soundManager } from '../utils/audio';
@@ -122,17 +122,6 @@ export const StoryExplorer: React.FC<StoryExplorerProps> = ({ onEarnStars }) => 
               <RefreshCw className="w-4 h-4" />
             </button>
           </div>
-        </div>
-
-        {/* Discovery Progress Meter */}
-        <div className="flex items-center justify-between gap-3 bg-white/80 p-3 rounded-2xl border border-rose-200 text-xs sm:text-sm font-extrabold text-rose-900">
-          <span className="flex items-center gap-1.5">
-            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-            <span>الْأَسْمَاءُ الْمُكْتَشَفَةُ:</span>
-          </span>
-          <span className="bg-rose-100 px-2.5 py-0.5 rounded-full border border-rose-300">
-            {currentDiscovered.size} مِنْ {totalNounsInStory}
-          </span>
         </div>
 
         {/* Interactive Clickable Sentence Words */}
